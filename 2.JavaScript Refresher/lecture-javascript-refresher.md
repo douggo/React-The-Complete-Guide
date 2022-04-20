@@ -5,8 +5,9 @@ An introduction to refresh some points, very important points, about JavaScript,
 ## Reference & Primitive Types
 
 Types of data can be divided into two groups:
-    *Primitive: string, boolean and numbers
-    *Reference: arrays and objects
+
+1. Primitive: string, boolean and numbers
+2. Reference: arrays and objects
 
 References appears when you set a value from a variable to another.
 
