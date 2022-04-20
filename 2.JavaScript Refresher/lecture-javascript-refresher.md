@@ -33,7 +33,7 @@ References appears when you set a value from a variable to another.
     person.name = 'Aleatório';
     console.log(secondPerson) // name: Aleatório;
 
-    // Its possivel to solve this problem creating a new object, however importing all attributes from the first object
+    // Its possible to solve this problem creating a new object, however importing all attributes from the first object
     const person = {
         name: 'Douglas'
     };
@@ -239,8 +239,9 @@ References appears when you set a value from a variable to another.
 ## Import / Export
 
 In this new version of Javascript, you can write code in modules:
-    - To the default `import`, you choose the name
-    - For the named export, you'll need to use the name defined when the export default was wroted
+
+* To the default `import`, you choose the name
+* For the named export, you'll need to use the name defined when the export default was wroted
 
 * Examples for exporting:
 
