@@ -1,10 +1,12 @@
 # Javascript Refresher
 
+An introduction to refresh some points, very important points, about JavaScript, before diving on how to know more about React!
+
 ## Reference & Primitive Types
 
 Types of data can be divided into two groups:
-    1. Primitive: string, boolean and numbers
-    2. Reference: arrays and objects
+    *Primitive: string, boolean and numbers
+    *Reference: arrays and objects
 
 References appears when you set a value from a variable to another.
 
@@ -43,26 +45,35 @@ References appears when you set a value from a variable to another.
 
 ## 'Let' and 'Const'
 
-* let   = variable values
+* let = variable values
 * const = constant values
 
 1. The older way to declare variables:
-    `var myName = 'Douglas';`
-    `console.log(myName); // Douglas`
-    `myName = 'Felipe';`
-    `console.log(myName); // Felipe`
+
+    ```sh
+    var myName = 'Douglas';
+    console.log(myName); // Douglas
+    myName = 'Felipe';
+    console.log(myName); // Felipe
+    ```
 
 2. The new way to declare variables:
-    `let myName = 'Douglas';`
-    `console.log(myName); // Douglas`
-    `myName = 'Felipe';`
-    `console.log(myName); // Felipe`
+
+    ```sh
+    let myName = 'Douglas';
+    console.log(myName); // Douglas
+    myName = 'Felipe';
+    console.log(myName); // Felipe
+    ```
 
 3. Constants:
-    `const myName = 'Douglas';`
-    `console.log(myName); // Douglas`
-    `myName = 'Felipe';`
-    `console.log(myName); // Will be triggered an error, because once created a constant, the constant can't be edited again.`
+
+    ```sh
+    const myName = 'Douglas';
+    console.log(myName); // Douglas
+    myName = 'Felipe';
+    console.log(myName); // Will be triggered an error, because once created a constant, the constant can't be edited again.
+    ```
 
 ## Array functions
 
