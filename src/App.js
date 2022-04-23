@@ -4,9 +4,9 @@ function App() {
   return (
     <div>
       <h2>Let's get started!</h2>
-      <ExpenseItem date='19/03/2022' description='Car Insurance' value='294,67' />
-      <ExpenseItem date='25/03/2022' description='Guitar' value='100' />
-      <ExpenseItem date='30/03/2022' description='Pizza' value='5,55' />
+      <ExpenseItem date={new Date(2020, 2, 19)} description='Car Insurance' value='294,67' />
+      <ExpenseItem date={new Date(2020, 3, 20)} description='Guitar' value='100' />
+      <ExpenseItem date={new Date(2020, 4, 21)} description='Pizza' value='5,55' />
     </div>
   );
 }
