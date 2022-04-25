@@ -7,7 +7,7 @@ const ExpenseItem = props => {
   const [description, setDescription] = useState(props.description);
 
   const clickHandler = () => {
-    setDescription('Mama Said');
+    setDescription('Updated!');
     console.log(description);
   };
 
