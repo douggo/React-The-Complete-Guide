@@ -1,12 +1,26 @@
-import ExpenseItem from "./components/ExpenseItem";
+import ExpenseList from "./components/ExpenseList";
 
 function App() {
+  const expenses = [
+    {
+      description : 'Car Insurance',
+      date        : new Date(2020, 2, 19),
+      value       : 264.97
+    },
+    {
+      description : 'Guitar Reformation',
+      date        : new Date(2020, 2, 20),
+      value       : 165.99
+    },
+    {
+      description : 'Supermarket',
+      date        : new Date(2020, 2, 21),
+      value       : 300.00
+    }
+  ];
   return (
     <div>
-      <h2>Let's get started!</h2>
-      <ExpenseItem date={new Date(2020, 2, 19)} description='Car Insurance' value='294,67' />
-      <ExpenseItem date={new Date(2020, 3, 20)} description='Guitar' value='100' />
-      <ExpenseItem date={new Date(2020, 4, 21)} description='Pizza' value='5,55' />
+      <ExpenseList expenses={expenses} />
     </div>
   );
 }
