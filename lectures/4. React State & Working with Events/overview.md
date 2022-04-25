@@ -1,0 +1,150 @@
+# What we'll be learning in this section?
+
+* Handling events (user clicks and more)
+* How can we ensure what's visible on screen changes
+* State concept and manipulate the state
+* Updating the UI & working with 'State'
+* A closer look at Components & State
+
+## Handling events
+
+We can handle events that happen after the page was loaded. When some prerequites are met, JavaScript can listen and do something. Every HTML component have a set of listeners:
+
+* onClick
+* onBlur
+* onKeyPressUp
+
+And many, many others.
+
+With that, we are going to add a button on the `ExpenseItem` component and this button will be responsable to do something when the click event is triggered.
+
+```sh
+import React from "react";
+import Card from "../UI/Card";
+import ExpenseDate from "./ExpenseDate";
+import './ExpenseItem.css';
+
+const ExpenseItem = props => {
+  const clickHandler = () => {
+    console.log('Clicked!');
+  };
+
+  return (
+    <Card className=' expense-item'>
+      <ExpenseDate date={props.date}/>
+      <div className='expense-item__description'>
+        <h2>{props.description}</h2>
+        <div className='expense-item__price'>${props.value}</div>
+      </div>
+      <button onClick={clickHandler}>Change title</button>
+    </Card>
+  );
+}
+
+export default ExpenseItem;
+```
+
+Here, we created the button and setted a `onClick` attribute. This attribute is then redirected to the `clickHandler` function, created above, which then triggers a `console.log()`.
+
+One could say that we can put the `clickHandler` with parentesis directly onto the `onClick`, but this will be a problem. Once we add the parentesis in there, the function will be executed and the `console.log()` will be processed. This isn't what we want, we want the console.log only when the button is clicked.
+
+So, let's say we need to update the expense's description. What we would do?
+
+```sh
+import React from "react";
+import Card from "../UI/Card";
+import ExpenseDate from "./ExpenseDate";
+import './ExpenseItem.css';
+
+const ExpenseItem = props => {
+  let description = props.description;
+  const clickHandler = () => {
+    description = 'new description';
+    console.log('Clicked!');
+  };
+
+  return (
+    <Card className=' expense-item'>
+      <ExpenseDate date={props.date}/>
+      <div className='expense-item__description'>
+        <h2>{description}</h2>
+        <div className='expense-item__price'>${props.value}</div>
+      </div>
+      <button onClick={clickHandler}>Change title</button>
+    </Card>
+  );
+}
+
+export default ExpenseItem;
+```
+
+Looking at the code, we created a variable to store the description that comes from `props` and when the function `clickHandler` is triggered, the new description is set. Well, this looks like correct, right? Wrong.
+
+## Nothing appears as it seems
+
+React doesn't work like that. It wouldn't simply change the variable's content and then update the title, like when we receive a POST requisition on the server and redirect to another page. Remember, React is **declarative**.
+
+When I say **declarative**, I say that React doesn't care how the function is going to be executed. React only cares how the function is going to be laid out in the browser. The `clickHandler` function is transcribed, of course, but React won't update the description, because it's not its responsability to do so.
+
+It's important to note that the components aren't called a second time after the initial rendering process is ended. Because of that the description won't update, which means that when a function inside a component is triggered, the rendering will not be called again.
+
+## How does React call the components?
+
+We actually never called a function when creating components, right? Actually, React is the one responsible to call all the component functions, it works like a stack of functions (LIFO).
+
+Starting with the `index.js`, React knows there are a `App` component. When it sees the component, React calls the function on `App.js`. This function by the end of it returns a JSX code with another component (`ExpenseList`). React then calls the function on `ExpenseList.js` and so on and so forth.
+
+When React reaches the end of the tree component, it begins to return all the functions to finally finish on the `index.js` again. Remember the stack of functions I said before (last in, first out).
+
+## Returning on how to update the description (State Hook)
+
+To actually change the expense's description, we need to tell React to `re-render` the component after the processing of the function is done. To do that, we'll need to use `State`, from React library.
+
+State is a React Hook, not a concept exclusive of React, that enables to re-render the component after a condition is met. In this case, the change of description.
+
+To do that, we neet to import it and use the function that React provides: `useState()`. This use function must be used on a const and by default, returns two things to us: `attribute` and `function`to set the attribute and re-render the component right after. And through the destructive array (JS new function), we can separate these into new consts.
+
+This is how should be (**looking at the `ExpenseItem.js` function**):
+
+```sh
+const ExpenseItem = props => {
+  const [description, setDescription] = useState(props.description);
+  
+  const clickHandler = () => {
+    setDescription('new description');
+  };
+
+  return (
+    <Card className=' expense-item'>
+      <ExpenseDate date={props.date}/>
+      <div className='expense-item__description'>
+        <h2>{description}</h2>
+        <div className='expense-item__price'>${props.value}</div>
+      </div>
+      <button onClick={clickHandler}>Change title</button>
+    </Card>
+  );
+}
+```
+
+When we use the `useState`, we should inform the attribute we want (in this case `description`) and a function which will be responsable to manage the attribute and re-render the component (in this case `setDescription`). Note that we sent `props.description` as a parameter to the `useState()` function. This is the way we show to React what is the standard value of what we are working with.
+
+**Important**:
+
+* useState should always be inside the component function.
+* useState should not be inside a function that is inside the component function.
+* We can use the function that sets the new value inside a function that is inside the component function.
+* We never set value to the attribute/const created by `useState()`. There's a exclusive function to that!
+* When the value of the attribute is changed through the function, React schedules a re-render task which will be executed after the change.
+* Don't matter how many instances of the same component we have in the moment, `useState` will always be created to every component and will work only with that component (one state won't affect another state from another instance of the same component).
+* When the re-rendering is being processed, doesn't matter how many instances of the same component we have in the moment, the re-render will be updating only the one that's changed.
+
+The first time the state is used, everything is new. Nothing was created before. But when the state is used, in this case when the description is changed, the component is re-rendered and React already knows that the state was used before, using the most recent updated information for the description.
+
+In the end, React will reevalute the component and change its state.
+
+## Many uses for `useState`
+
+`useState` has a variety of situations where we can use it. In this case we used it when the user clicked on the button to change the description of the expense.
+
+But, for example, we can use it to update the state when a HTTP request is completed and a particular thing must be changed depending the response we got back from the server or when a timer (set with `setTimeout()`) expired.
