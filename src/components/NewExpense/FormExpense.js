@@ -13,7 +13,7 @@ const FormExpense = (props) => {
   // });
 
   const descriptionChangeHandler = event => {
-    setEnteredDescription(event.target.value)
+    setEnteredDescription(event.target.value);
 
     // OR
 
