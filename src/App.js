@@ -6,19 +6,19 @@ const DUMMY_EXPENSES = [
   {
     id          : 1,
     description : 'Car Insurance',
-    date        : new Date(2020, 2, 19),
+    date        : new Date(2022, 2, 19),
     value       : 264.97
   },
   {
     id          : 2,
     description : 'Guitar Reformation',
-    date        : new Date(2020, 2, 20),
+    date        : new Date(2022, 3, 20),
     value       : 165.99
   },
   {
     id          : 3,
     description : 'Supermarket',
-    date        : new Date(2020, 2, 21),
+    date        : new Date(2020, 3, 21),
     value       : 300.00
   }
 ];
